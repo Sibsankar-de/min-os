@@ -29,7 +29,7 @@ ebr_drive_number:			db 0					; 0x00 floppy, 0x80 has use
 							db 0					; reserved
 ebr_signature:				db 29h
 ebr_volume_id:				db 12h, 34h, 56h, 78h	; Serial number, value doesn't matter
-ebr_volume_label:			db 'SDE OSDEV  '		; 11 bytes, padded with space
+ebr_volume_label:			db 'MIN OS     '		; 11 bytes, padded with space
 ebr_system_id:				db 'FAT12   '			; 8 bytes
 
 
@@ -84,7 +84,7 @@ main:
 	call disk_read
 	
 	; print message
-	mov si, msg_hello
+	mov si, msg_welcome
 	call puts
 
 	cli					; disable interrupts, this way CPU can't get out of 'halt' state
@@ -220,7 +220,7 @@ disk_reset:
 	ret
 
 
-msg_hello: 			db 'Hello world!', ENDL, 0
+msg_welcome: 		db 'WELCOME TO MIN-OS!', ENDL, 0
 msg_read_failed:	db 'Read from disk failed!', ENDL, 0
 
 times 510-($-$$) db 0
