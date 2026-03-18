@@ -41,6 +41,7 @@ $(BUILD_DIR)/kernel.bin: always
 # Tools
 #
 tools_fat: $(BUILD_DIR)/tools/fat
+
 $(BUILD_DIR)/tools/fat: always $(TOOLS_DIR)/fat/fat.c
 	mkdir -p $(BUILD_DIR)/tools
 	$(CC) -g -o $(BUILD_DIR)/tools/fat $(TOOLS_DIR)/fat/fat.c

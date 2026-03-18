@@ -1,8 +1,15 @@
-org 0x7c00
+org 0x0
 bits 16
 
 start:
-	jmp main
+	; print message
+	mov si, msg_hello
+	call puts
+
+.hlt:
+	cli
+	hlt
+
 
 
 ;
@@ -31,28 +38,4 @@ puts:
 	ret
 
 
-
-main:
-	; setup data segments
-	mov ax, 0
-	mov ds, ax
-	mov es, ax
-
-	; setup stack
-	mov ss, ax
-	mov sp, 0x7c00	; stack grows downwards from where we are loaded in memory
-	
-	; print message
-	mov si, msg_hello
-	call puts
-
-	hlt
-
-.halt:
-	jmp .halt
-
-
-msg_hello: db 'Hello world!', 0
-
-times 510-($-$$) db 0
-dw 0AA55h
+msg_hello: db 'Hello world from KERNEL!', 0
